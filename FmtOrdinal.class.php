@@ -29,8 +29,8 @@ class FmtOrdinal
 		if($l > 80) return '무한';
 		$r = array();
 		for($i = 0; $i < $l - 1; $i ++) {
-			if($n[$i] > '1') $r[] = self::$num[$n[$i]];
 			$d = $l - $i - 1;
+			if($n[$i] > '1' || $d % 4 == 0) $r[] = self::$num[$n[$i]];
 			if($d % 4 == 0) $r[] = self::$digits[$d / 4];
 			if($n[$i] != '0') $r[] = self::$cardinal[$d % 4];
 		}
