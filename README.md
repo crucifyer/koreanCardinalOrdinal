@@ -2,5 +2,5 @@
 
 
 test page
-- php : http://ideone.com/hNSjlB
-- require js : http://crucifyer.github.io/koreanCardinalOrdinal/
+- php : https://ideone.com/hNSjlB
+- require js : https://crucifyer.github.io/koreanCardinalOrdinal/
