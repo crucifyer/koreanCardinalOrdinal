@@ -9,8 +9,8 @@
 //
 // $Id: fmt.ordinal.js, 2015. 4. 14. crucify Exp $
 
-define(function() {
-	var digits = ['', '만', '억', '조', '경', '해', '자', '양', '구', '간', '정', '재', '극', '항하사', '아승기', '나유타', '불가사의', '무량대수', '겁', '업'],
+(function(w, undefined) {
+	let digits = ['', '만', '억', '조', '경', '해', '자', '양', '구', '간', '정', '재', '극', '항하사', '아승기', '나유타', '불가사의', '무량대수', '겁', '업'],
 		num = ['', '일', '이', '삼', '사', '오', '육', '칠', '팔', '구'],
 		cardinal = ['', '십', '백', '천'],
 		ordinal = [
@@ -73,5 +73,6 @@ define(function() {
 				);
 			}
 		};
-	return fmt;
-});
+	if(w.define) define(function() { return fmt; });
+	else w.FmtOrdinal = fmt;
+})(window);
