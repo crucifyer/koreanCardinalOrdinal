@@ -2,4 +2,4 @@
 
 test page
 - php : https://ideone.com/hNSjlB
-- require js : https://crucifyer.github.io/koreanCardinalOrdinal/
+- js : https://crucifyer.github.io/koreanCardinalOrdinal/
