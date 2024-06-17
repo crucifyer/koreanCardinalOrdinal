@@ -36,7 +36,7 @@
 				var t = $(this).text();
 				this.title = t;
 				$(this).text(
-					fmt.toCardinal(t, $(this).data('pronunFirstOne'))
+					fmt.toCardinal(t, $(this).data('pronun-first-one'))
 				);
 			},
 			toOrdinal : function(n, type, unit) {
