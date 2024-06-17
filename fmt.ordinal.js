@@ -19,13 +19,13 @@
 		],
 		largeordinal = ['', '열', '스물', '서른', '마흔', '쉰', '예순', '일흔', '여든', '아흔'],
 		fmt = {
-			toCardinal : function(n) {
+			toCardinal : function(n, pronunFirstOne) {
 				n += '';
 				if(n.length > 80) return '무한';
 				var r = [];
 				for(var i = 0; i < n.length - 1; i ++) {
 					var d = n.length - i - 1;
-					if(n[i] > '1' || (i > 0 && d % 4 == 0)) r.push(num[n[i] * 1]);
+					if(n[i] > '1' || (i > 0 && d % 4 == 0) || (pronunFirstOne && i == 0)) r.push(num[n[i] * 1]);
 					if(d % 4 == 0) r.push(digits[d / 4]);
 					if(n[i] != '0') r.push(cardinal[d % 4]);
 				}
@@ -36,7 +36,7 @@
 				var t = $(this).text();
 				this.title = t;
 				$(this).text(
-					fmt.toCardinal(t)
+					fmt.toCardinal(t, $(this).data('pronunOne'))
 				);
 			},
 			toOrdinal : function(n, type, unit) {
@@ -54,10 +54,10 @@
 					type = 1;
 				}
 				if(n.length > 2) {
-					r.push(fmt.toCardinal(n.substr(0, n.length - 2) + '00'));
+					r.push(fmt.toCardinal(n.substring(0, n.length - 2) + '00'));
 				}
 				n = '0' + n;
-				n = n.substr(n.length - 2);
+				n = n.substring(n.length - 2);
 				r.push(largeordinal[n[0] * 1]);
 				r.push(
 					type == 2 && n[1] == '1' ? '첫' : ordinal[s][n[1] * 1]
