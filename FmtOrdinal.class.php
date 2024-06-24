@@ -23,16 +23,25 @@ class FmtOrdinal
 
 	private function __construct() {}
 
-	public static function toCardinal($n) {
+	public static function toCardinal($n, $pronunFirstOne = false) {
 		$n .= '';
 		$l = strlen($n);
 		if($l > 80) return '무한';
-		$r = array();
+		$r = [];
+		$pronunDigits = true;
 		for($i = 0; $i < $l - 1; $i ++) {
 			$d = $l - $i - 1;
-			if($n[$i] > '1' || ($i > 0 && $d % 4 == 0)) $r[] = self::$num[$n[$i]];
-			if($d % 4 == 0) $r[] = self::$digits[$d / 4];
-			if($n[$i] != '0') $r[] = self::$cardinal[$d % 4];
+			if(($n[$i] > '1' || ($i > 0 && $d % 4 == 0) || ($pronunFirstOne && $i == 0)) && self::$num[$n[$i]]) {
+				$r[] = self::$num[$n[$i]];
+				$pronunDigits = true;
+			}
+			if($pronunDigits && $d % 4 == 0) {
+				$r[] = self::$digits[$d / 4];
+				$pronunDigits = false;
+			}
+			if($n[$i] != '0') {
+				$r[] = self::$cardinal[$d % 4];
+			}
 		}
 		$r[] = self::$num[$n[$l - 1]];
 		return implode($r);
@@ -52,7 +61,7 @@ class FmtOrdinal
 			$s = 0;
 			$type = 1;
 		}
-		$r = array();
+		$r = [];
 		if($l > 2) {
 			$r[] = self::toCardinal(substr($n, 0, -2).'00');
 		}

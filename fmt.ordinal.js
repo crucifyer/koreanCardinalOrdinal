@@ -22,12 +22,24 @@
 			toCardinal : function(n, pronunFirstOne) {
 				n += '';
 				if(n.length > 80) return '무한';
-				var r = [];
-				for(var i = 0; i < n.length - 1; i ++) {
-					var d = n.length - i - 1;
-					if(n[i] > '1' || (i > 0 && d % 4 == 0) || (pronunFirstOne && i == 0)) r.push(num[n[i] * 1]);
-					if(d % 4 == 0) r.push(digits[d / 4]);
-					if(n[i] != '0') r.push(cardinal[d % 4]);
+				const r = [];
+				let pronunDigits = true;
+				for(let i = 0; i < n.length - 1; i ++) {
+					const d = n.length - i - 1;
+					if(n[i] > '1' || (i > 0 && d % 4 == 0) || (pronunFirstOne && i == 0)) {
+						const tnum = num[n[i] * 1];
+						if(tnum) {
+							r.push(tnum);
+							pronunDigits = true;
+						}
+					}
+					if(pronunDigits && d % 4 == 0) {
+						r.push(digits[d / 4]);
+						pronunDigits = false;
+					}
+					if(n[i] != '0') {
+						r.push(cardinal[d % 4]);
+					}
 				}
 				r.push(num[n[n.length - 1] * 1]);
 				return r.join('');
